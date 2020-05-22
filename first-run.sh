@@ -1,31 +1,56 @@
 #!/bin/bash
+echo "Upload system"
+
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
+sudo apt autoremove -y
 sudo apt-get install -y wget zsh git
 
-printf "\nexport SHELL=/bin/zsh" >> ~/.bash_profile
-printf "\nexec /bin/zsh -l" >> ~/.bash_profile
+cd ~/
+wget https://github.com/renanteixeira/linux-first-run/blob/master/.aliases
 
-wget https://raw.githubusercontent.com/renanteixeira/linux-first-run/master/.zshrc
+echo "Download Oh My ZSH"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-zsh
+echo "Download Zinit Plugin Manager"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)" "" --unattended
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+echo "Set ZSH as default"
+cat <<EOT >> ~/.bash_profile
+export SHELL=/bin/zsh
+exec /bin/zsh -l
+EOT
 
-source ~/.zshrc
+cat <<EOT >> ~/.zshrc
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma/fast-syntax-highlighting
+zinit light zsh-users/zsh-completions
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)"
+SPACESHIP_PROMPT_ORDER=(
+  user
+  dir
+  host
+  git
+  hg
+  exec_time
+  line_sep
+  vi_mode
+  jobs
+  exit_code
+  char
+)
+SPACESHIP_USER_SHOW=always
+SPACESHIP_PROMPT_ADD_NEWLINE=false
+SPACESHIP_CHAR_SYMBOL=">"
+SPACESHIP_CHAR_SUFFIX=" "
 
-source ~/.zshrc
+source $HOME/.aliases
+EOT
 
-printf "\nzinit light zsh-users/zsh-autosuggestions" >> ~/.zshrc
-printf "\nzinit light zdharma/fast-syntax-highlighting" >> ~/.zshrc
-printf "\nzinit light zsh-users/zsh-completions" >> ~/.zshrc
-
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
-ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
+ln -s "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
 
 sed -i -- 's/robbyrussell/spaceship/g' ~/.zshrc
 
-source ~/.zshrc
+zsh
