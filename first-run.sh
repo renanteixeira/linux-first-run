@@ -8,7 +8,8 @@ sudo apt autoremove -y
 sudo apt-get install -y wget zsh git
 
 cd ~/
-wget https://github.com/renanteixeira/linux-first-run/blob/master/.aliases
+echo "Download custom aliases"
+wget https://raw.githubusercontent.com/renanteixeira/linux-first-run/master/.aliases
 
 echo "Download Oh My ZSH"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
@@ -22,6 +23,7 @@ export SHELL=/bin/zsh
 exec /bin/zsh -l
 EOT
 
+echo "Edit .zshrc"
 cat <<EOT >> ~/.zshrc
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma/fast-syntax-highlighting
@@ -48,9 +50,13 @@ SPACESHIP_CHAR_SUFFIX=" "
 source $HOME/.aliases
 EOT
 
+echo "Download spaceship theme"
 git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
-ln -s "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+if [ -d "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"]
+then
+  ln -s "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+  sed -i -- 's/robbyrussell/spaceship/g' ~/.zshrc
+fi
 
-sed -i -- 's/robbyrussell/spaceship/g' ~/.zshrc
-
+"Processo finalizado"
 zsh
