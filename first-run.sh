@@ -51,12 +51,15 @@ source $HOME/.aliases
 EOT
 
 echo "Download spaceship theme"
-git clone https://github.com/denysdovhan/spaceship-prompt.git "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
-if [ -d "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"]
+
+SPACESHIP_DIR="~/.oh-my-zsh/custom/themes/spaceship-prompt"
+git clone https://github.com/denysdovhan/spaceship-prompt.git $SPACESHIP_DIR
+
+if [ -d "SPACESHIP_DIR/" ]
 then
-  ln -s "$HOME/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+  ln -s "$SPACESHIP_DIR/spaceship.zsh-theme" "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
   sed -i -- 's/robbyrussell/spaceship/g' ~/.zshrc
 fi
 
-"Processo finalizado"
+echo "Processo finalizado"
 zsh
