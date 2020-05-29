@@ -52,12 +52,12 @@ EOT
 
 echo "Download spaceship theme"
 
-SPACESHIP_DIR="~/.oh-my-zsh/custom/themes/spaceship-prompt"
+SPACESHIP_DIR="$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
 git clone https://github.com/denysdovhan/spaceship-prompt.git $SPACESHIP_DIR
 
 if [ -d "SPACESHIP_DIR/" ]
 then
-  ln -s "$SPACESHIP_DIR/spaceship.zsh-theme" "~/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
+  ln -s "$SPACESHIP_DIR/spaceship.zsh-theme" "$HOME/.oh-my-zsh/custom/themes/spaceship.zsh-theme"
   sed -i -- 's/robbyrussell/spaceship/g' ~/.zshrc
 fi
 
