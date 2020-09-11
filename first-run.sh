@@ -1,57 +1,74 @@
 #!/bin/bash
+set -eu
+
+###################################################################
+#Script Name	: first-run.sh
+#Description	: Install ZSH and Configure some features on Shell
+#Author       	: Renan Teixeira
+#Email         	: contato@renanteixeira.com.br
+#Version        : 0.2 - 11/09/2020 - 15:20
+###################################################################
+
+#Global variables
+GREEN="\e[92m"
+RED="\e[31m"
+END="\e[0m"
+BLUE="\e[34m"
+YELLOW="\e[33m"
+
 center() {
 	termwidth="$(tput cols)"
 	padding="$(printf '%0.1s' ={1..500})"
 	printf '%*.*s %s %*.*s\n' 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
 }
 
-echo -e "\e[1;100;92m"
+printf "${GREEN}"
 center "Update System"
-echo -e "\e[0m"
+printf "${END}"
 
 sudo apt-get update
 sudo apt-get upgrade -y
 sudo apt-get dist-upgrade -y
 sudo apt autoremove -y
 
-echo -e "\e[1;100;92m"
-center "Install WGET, ZSH, GIT"
-echo -e "\e[0m"
+printf "${BLUE}"
+center "Install WGET, ZSH, GIT and APTITUDE"
+printf "${END}"
 
-sudo apt-get install -y wget zsh git
+sudo apt-get install -y wget zsh git aptitude
 
 cd ~/
 
-echo -e "\e[1;102;90m"
+printf "${YELLOW}"
 center "Download custom aliases"
-echo -e "\e[0m"
+printf "${END}"
 
 wget https://raw.githubusercontent.com/renanteixeira/linux-first-run/master/.aliases
 
-echo -e "\e[1;102;90m"
+printf "${GREEN}"
 center "Download Oh My Zsh"
-echo -e "\e[0m"
+printf "${END}"
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-echo -e "\e[1;102;90m"
+printf "${YELLOW}"
 center "Download Zinit Plugin Manager"
-echo -e "\e[0m"
+printf "${END}"
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)" "" --unattended
 
-echo -e "\e[1;46;37m"
+printf "${BLUE}"
 center "Set ZSH as default"
-echo -e "\e[0m"
+printf "${END}"
 
 cat <<EOT >> ~/.bash_profile
 export SHELL=/bin/zsh
 exec /bin/zsh -l
 EOT
 
-echo -e "\e[1;46;37m"
+printf "${BLUE}"
 center "Edit .zshrc"
-echo -e "\e[0m"
+printf "${END}"
 
 cat <<EOT >> ~/.zshrc
 zinit light zsh-users/zsh-autosuggestions
@@ -79,9 +96,9 @@ SPACESHIP_CHAR_SUFFIX=" "
 source $HOME/.aliases
 EOT
 
-echo -e "\e[1;102;90m"
+printf "${YELLOW}"
 center "Download spaceship theme"
-echo -e "\e[0m"
+printf "${END}"
 
 SPACESHIP_DIR="$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
 git clone https://github.com/denysdovhan/spaceship-prompt.git $SPACESHIP_DIR
@@ -92,9 +109,9 @@ then
 	sed -i -- 's/robbyrussell/spaceship/g' ~/.zshrc
 fi
 
-echo -e "\e[1;103;90m"
+printf "${GREEN}"
 center "Process completed"
 center "Switching to ZSH and downloading settings"
-echo -e "\e[0m"
+printf "${END}"
 
 zsh
