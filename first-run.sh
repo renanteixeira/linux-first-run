@@ -55,7 +55,7 @@ printf "${YELLOW}"
 center "Download Zinit Plugin Manager"
 printf "${END}"
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma/zinit/master/doc/install.sh)" "" --unattended
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)" "" --unattended
 
 printf "${BLUE}"
 center "Set ZSH as default"
@@ -72,7 +72,7 @@ printf "${END}"
 
 cat <<EOT >> ~/.zshrc
 zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma/fast-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
 
 SPACESHIP_PROMPT_ORDER=(
