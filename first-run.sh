@@ -55,7 +55,7 @@ printf "${YELLOW}"
 center "Download Zinit Plugin Manager"
 printf "${END}"
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/zdharma-continuum/zinit/master/doc/install.sh)" "" --unattended
+sh -c "$(curl -fsSL https://git.io/zinit-install)"
 
 printf "${BLUE}"
 center "Set ZSH as default"
