@@ -49,13 +49,13 @@ printf "${GREEN}"
 center "Download Oh My Zsh"
 printf "${END}"
 
-bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
 printf "${YELLOW}"
 center "Download Zinit Plugin Manager"
 printf "${END}"
 
-sh -c "$(curl -fsSL https://git.io/zinit-install)"
+bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 
 printf "${BLUE}"
 center "Set ZSH as default"
