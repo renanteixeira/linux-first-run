@@ -49,7 +49,7 @@ printf "${GREEN}"
 center "Download Oh My Zsh"
 printf "${END}"
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)"
 
 printf "${YELLOW}"
 center "Download Zinit Plugin Manager"
