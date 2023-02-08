@@ -74,7 +74,6 @@ cat <<EOT >> ~/.zshrc
 zinit light zsh-users/zsh-autosuggestions
 zinit light zdharma-continuum/fast-syntax-highlighting
 zinit light zsh-users/zsh-completions
-zinit light "spaceship-prompt/spaceship-vi-mode"
 
 SPACESHIP_PROMPT_ORDER=(
   user
@@ -103,6 +102,7 @@ printf "${END}"
 
 SPACESHIP_DIR="$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
 git clone https://github.com/denysdovhan/spaceship-prompt.git $SPACESHIP_DIR
+git clone https://github.com/spaceship-prompt/spaceship-vi-mode.git $ZSH_CUSTOM/plugins/spaceship-vi-mode
 
 if [ -d "$SPACESHIP_DIR/" ]
 then
