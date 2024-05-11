@@ -6,7 +6,7 @@ set -eu
 #Description	: Install ZSH and Configure some features on Shell
 #Author       	: Renan Teixeira
 #Email         	: contato@renanteixeira.com.br
-#Version        : 0.2 - 11/09/2020 - 15:20
+#Version        : 0.3 - 11/05/2024
 ###################################################################
 
 #Global variables
@@ -101,6 +101,7 @@ center "Download spaceship theme"
 printf "${END}"
 
 SPACESHIP_DIR="$HOME/.oh-my-zsh/custom/themes/spaceship-prompt"
+ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 git clone https://github.com/denysdovhan/spaceship-prompt.git $SPACESHIP_DIR
 git clone https://github.com/spaceship-prompt/spaceship-vi-mode.git $ZSH_CUSTOM/plugins/spaceship-vi-mode
 
